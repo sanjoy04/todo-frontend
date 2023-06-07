@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
+import Todo from "./Pages/Todo";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Todo />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/Todo" element={<Todo />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
