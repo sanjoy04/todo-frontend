@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./SignUp.module.css";
 import { Link, useNavigate } from "react-router-dom";
-const API_BASE = "http://localhost:8000";
+const API_BASE = "https://todo-backend-woad.vercel.app/";
 
 const Index = () => {
   const [name, setName] = useState("");
@@ -31,7 +31,6 @@ const Index = () => {
     };
     checkUser();
   }, []);
-
 
   const registerUser = async (event) => {
     event.preventDefault();

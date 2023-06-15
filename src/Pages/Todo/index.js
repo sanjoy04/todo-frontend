@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "https://todo-backend-woad.vercel.app/";
 const Index = () => {
   const [todos, setTodos] = useState([]);
   const [popupActive, setPopupActive] = useState(false);
