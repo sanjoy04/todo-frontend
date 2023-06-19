@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./SignUp.module.css";
 import { Link, useNavigate } from "react-router-dom";
-const API_BASE = "https://todo-backend-woad.vercel.app/";
+// require("dotenv").config();
+
+const API_BASE = process.env.API_BASE || 8000;
 
 const Index = () => {
   const [name, setName] = useState("");

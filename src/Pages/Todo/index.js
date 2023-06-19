@@ -3,8 +3,9 @@ import styles from "./Todo.module.css";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+// require("dotenv").config();
 
-const API_BASE = "https://todo-backend-woad.vercel.app/";
+const API_BASE = process.env.API_BASE || 8000;
 const Index = () => {
   const [todos, setTodos] = useState([]);
   const [popupActive, setPopupActive] = useState(false);
@@ -23,11 +24,14 @@ const Index = () => {
           credentials: "include",
           mode: "cors",
         });
+        // const txt = await response.json();
+        // console.log("txt", txt);
+        // const data = JSON.parse(txt);
         const data = await response.json();
         if (data.status === "error") return navigate("/login");
         GetTodos();
       } catch (err) {
-        // console.log(err);
+        console.log(err);
         alert("Error logging in user");
       }
     };
@@ -36,7 +40,7 @@ const Index = () => {
       const response = await fetch(API_BASE + "/user/getUser", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", 
         },
         credentials: "include",
         mode: "cors",
