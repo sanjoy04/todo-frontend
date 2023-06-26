@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 // require("dotenv").config();
 
-const API_BASE = process.env.API_BASE || 8000;
+const API_BASE = "http://localhost:8000";
+
 const Index = () => {
   const [todos, setTodos] = useState([]);
   const [popupActive, setPopupActive] = useState(false);
@@ -13,50 +14,56 @@ const Index = () => {
   const [name, setName] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const response = await fetch(API_BASE + "/user/verify", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          mode: "cors",
-        });
-        // const txt = await response.json();
-        // console.log("txt", txt);
-        // const data = JSON.parse(txt);
-        const data = await response.json();
-        if (data.status === "error") return navigate("/login");
-        GetTodos();
-      } catch (err) {
-        console.log(err);
-        alert("Error logging in user");
-      }
-    };
-
-    const findUser = async () => {
-      const response = await fetch(API_BASE + "/user/getUser", {
+  // const findUser = async () => {
+  //   const response = await fetch(API_BASE + "/user/getUser", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     credentials: "include",
+  //     mode: "cors",
+  //   });
+  //   const data = await response.json();
+  //   setName(data?.name);
+  // };
+  const checkUser = async () => {
+    try {
+      const response = await fetch(API_BASE + "/user/verify", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json", 
+          Accept: "*/*",
+          "Content-Type": "application/json",
         },
         credentials: "include",
-        mode: "cors",
+        // mode: "cors",
       });
+      // const txt = await response.json();
+      // console.log("txt", txt);
+      // const data = await response.text();
+      // console.log(data);
       const data = await response.json();
+      console.log(data);
+      if (data.status === "error") return navigate("/login");
       setName(data?.name);
-    };
+      GetTodos();
+    } catch (err) {
+      console.log(err);
+      // alert("Error logging in user");
+    }
+  };
 
+  useEffect(() => {
     checkUser();
-    findUser();
   }, []);
 
   const GetTodos = () => {
     fetch(API_BASE + "/todos", {
       credentials: "include",
-      mode: "cors",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+      },
+      // mode: "cors",
     })
       .then((res) => res.json())
       .then((data) => {
@@ -87,6 +94,10 @@ const Index = () => {
     const data = await fetch(API_BASE + "/todo/delete/" + id, {
       method: "DELETE",
       credentials: "include",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+      },
     }).then((res) => res.json());
 
     setTodos((todos) => todos.filter((todo) => todo._id !== data._id));
@@ -97,7 +108,8 @@ const Index = () => {
       const request = await fetch(API_BASE + "/todo/new", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          Accept: "*/*",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           text: newTodo,
@@ -122,7 +134,7 @@ const Index = () => {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        mode: "cors",
+        // mode: "cors",
       });
       const data = await response.json();
       if (data.status === "error") return alert(data.message);

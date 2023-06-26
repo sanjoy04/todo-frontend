@@ -3,7 +3,7 @@ import styles from "./SignUp.module.css";
 import { Link, useNavigate } from "react-router-dom";
 // require("dotenv").config();
 
-const API_BASE = process.env.API_BASE || 8000;
+const API_BASE = "http://localhost:8000";
 
 const Index = () => {
   const [name, setName] = useState("");
@@ -18,6 +18,7 @@ const Index = () => {
         const response = await fetch(API_BASE + "/user/verify", {
           method: "GET",
           headers: {
+            Accept: "*/*",
             "Content-Type": "application/json",
           },
           credentials: "include",

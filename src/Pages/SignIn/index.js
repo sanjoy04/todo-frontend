@@ -3,7 +3,7 @@ import styles from "./SignIn.module.css";
 import { Link, useNavigate } from "react-router-dom";
 // require("dotenv").config();
 
-const API_BASE = process.env.API_BASE || 8000;
+const API_BASE = "http://localhost:8000";
 
 const Index = () => {
   const [email, setEmail] = useState("");
@@ -38,10 +38,11 @@ const Index = () => {
       const response = await fetch(API_BASE + "/user/login", {
         method: "POST",
         headers: {
+          Accept: "*/*",
           "Content-Type": "application/json",
         },
         credentials: "include",
-        mode: "cors",
+        // mode: "cors",
         body: JSON.stringify({
           email,
           password,
