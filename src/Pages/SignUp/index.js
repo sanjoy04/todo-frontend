@@ -3,7 +3,7 @@ import styles from "./SignUp.module.css";
 import { Link, useNavigate } from "react-router-dom";
 // require("dotenv").config();
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "https://todo-backend-woad.vercel.app/";
 
 const Index = () => {
   const [name, setName] = useState("");
